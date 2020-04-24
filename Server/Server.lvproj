@@ -61,7 +61,7 @@
 		<Item Name="Type Definitions" Type="Folder">
 			<Item Name="UI Data.ctl" Type="VI" URL="../controls/UI Data.ctl"/>
 		</Item>
-		<Item Name="DataPacket.lvclass" Type="LVClass" URL="../data_packet/DataPacket.lvclass"/>
+		<Item Name="DataFrame.lvclass" Type="LVClass" URL="../dataframe/DataFrame.lvclass"/>
 		<Item Name="Main.vi" Type="VI" URL="../Main.vi"/>
 		<Item Name="server.lvlib" Type="Library" URL="../server/server.lvlib"/>
 		<Item Name="Dependencies" Type="Dependencies">
