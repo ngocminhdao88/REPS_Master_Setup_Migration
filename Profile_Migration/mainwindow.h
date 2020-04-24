@@ -15,7 +15,18 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+public slots:
+    void onOpenButtonClicked();
+    void onSaveButtonClicked();
+    void onSaveAsButtonClicked();
+    void onAutoPopulateButtonClicked();
+
+private:
+    /* Setup SIGNAL-SLOT for buttons */
+    void buttonSignalSlotSetup();
+
 private:
     Ui::MainWindow *ui;
+    QString masterFile;
 };
 #endif // MAINWINDOW_H
