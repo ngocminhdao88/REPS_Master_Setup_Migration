@@ -68,6 +68,7 @@
 		<Item Name="server.lvlib" Type="Library" URL="../server/server.lvlib"/>
 		<Item Name="worker.lvlib" Type="Library" URL="../worker/worker.lvlib"/>
 		<Item Name="logger.lvlib" Type="Library" URL="../logger/logger.lvlib"/>
+		<Item Name="server_loop_data.ctl" Type="VI" URL="../server/server_loop_data.ctl"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="vi.lib" Type="Folder">
 				<Item Name="BuildHelpPath.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/BuildHelpPath.vi"/>
@@ -102,6 +103,8 @@
 				<Item Name="Three Button Dialog.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Three Button Dialog.vi"/>
 				<Item Name="Trim Whitespace.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Trim Whitespace.vi"/>
 				<Item Name="whitespace.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/whitespace.ctl"/>
+				<Item Name="NI_FileType.lvlib" Type="Library" URL="/&lt;vilib&gt;/Utility/lvfile.llb/NI_FileType.lvlib"/>
+				<Item Name="Application Directory.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/file.llb/Application Directory.vi"/>
 			</Item>
 		</Item>
 		<Item Name="Build Specifications" Type="Build">
