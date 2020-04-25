@@ -5,4 +5,6 @@
 	<Property Name="NI.Lib.Version" Type="Str">1.0.0.0</Property>
 	<Property Name="NI.LV.All.SourceOnly" Type="Bool">false</Property>
 	<Item Name="server_loop.vi" Type="VI" URL="../server_loop.vi"/>
+	<Item Name="test_client.vi" Type="VI" URL="../test_client.vi"/>
+	<Item Name="test_server.vi" Type="VI" URL="../test_server.vi"/>
 </Library>

@@ -52,6 +52,11 @@
 		</Item>
 		<Item Name="Support VIs" Type="Folder">
 			<Property Name="NI.SortType" Type="Int">3</Property>
+			<Item Name="Notifiers" Type="Folder">
+				<Item Name="Close Notifiers.vi" Type="VI" URL="../support/Notifiers/Close Notifiers.vi"/>
+				<Item Name="Create Notifiers.vi" Type="VI" URL="../support/Notifiers/Create Notifiers.vi"/>
+				<Item Name="Notifiers.ctl" Type="VI" URL="../support/Notifiers/Notifiers.ctl"/>
+			</Item>
 			<Item Name="Message Queue.lvlib" Type="Library" URL="../support/Message Queue/Message Queue.lvlib"/>
 			<Item Name="User Event - Stop.lvlib" Type="Library" URL="../support/User Event - Stop/User Event - Stop.lvlib"/>
 			<Item Name="Check Loop Error.vi" Type="VI" URL="../support/Check Loop Error.vi"/>
