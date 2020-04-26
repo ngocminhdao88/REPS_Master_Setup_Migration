@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "tcpclient.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -25,8 +26,16 @@ private:
     /* Setup SIGNAL-SLOT for buttons */
     void buttonSignalSlotSetup();
 
+    /* Setup SIGNAL-SLOT */
+    void signalSlotSetup();
+
+private slots:
+    void errorMessage(QString errorString);
+
 private:
     Ui::MainWindow *ui;
     QString masterFile;
+    TCPClient *tcpClient;
+
 };
 #endif // MAINWINDOW_H
