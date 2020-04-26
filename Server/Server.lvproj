@@ -111,6 +111,8 @@
 				<Item Name="NI_FileType.lvlib" Type="Library" URL="/&lt;vilib&gt;/Utility/lvfile.llb/NI_FileType.lvlib"/>
 				<Item Name="Application Directory.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/file.llb/Application Directory.vi"/>
 			</Item>
+			<Item Name="get_length.vi" Type="VI" URL="../dataframe/get_length.vi"/>
+			<Item Name="get_frame.vi" Type="VI" URL="../dataframe/get_frame.vi"/>
 		</Item>
 		<Item Name="Build Specifications" Type="Build">
 			<Item Name="Main Application" Type="EXE">
