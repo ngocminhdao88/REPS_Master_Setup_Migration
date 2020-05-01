@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "tcpclient.h"
+#include "datamodel.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -36,6 +37,6 @@ private:
     Ui::MainWindow *ui;
     QString masterFile;
     TCPClient *tcpClient;
-
+    DataModel *m_model;
 };
 #endif // MAINWINDOW_H

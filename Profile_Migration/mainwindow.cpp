@@ -6,8 +6,11 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
+    , m_model(new DataModel(this))
 {
     ui->setupUi(this);
+    ui->tableView->setModel(m_model);
+
     tcpClient = new TCPClient(this);
 
     buttonSignalSlotSetup();
