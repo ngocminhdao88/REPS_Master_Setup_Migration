@@ -17,18 +17,17 @@ MainWindow::MainWindow(QWidget *parent)
 }
 
 void MainWindow::onOpenButtonClicked() {
-//    QString path = QFileDialog::getOpenFileName(this,
-//                                                "Open Master File",
-//                                                "",
-//                                                "Master File (*.mas)");
+    QString path = QFileDialog::getOpenFileName(this,
+                                                "Open Master File",
+                                                "",
+                                                "Master File (*.mas)");
 
-//    if (path.isEmpty())
-//        return;
+    if (path.isEmpty())
+        return;
 
-//    masterFile = path;
+    masterFile = path;
 
-    tcpClient->sendRequest(Request::Read, "Read Command");
-
+    tcpClient->sendRequest(Request::Read, masterFile);
 }
 
 void MainWindow::onSaveButtonClicked() {

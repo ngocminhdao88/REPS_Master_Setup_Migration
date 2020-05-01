@@ -4,5 +4,7 @@
 	<Property Name="NI.Lib.SourceVersion" Type="Int">385908736</Property>
 	<Property Name="NI.Lib.Version" Type="Str">1.0.0.0</Property>
 	<Property Name="NI.LV.All.SourceOnly" Type="Bool">false</Property>
+	<Item Name="read_master_file.vi" Type="VI" URL="../read_master_file.vi"/>
 	<Item Name="worker_loop.vi" Type="VI" URL="../worker_loop.vi"/>
+	<Item Name="write_master_file.vi" Type="VI" URL="../write_master_file.vi"/>
 </Library>

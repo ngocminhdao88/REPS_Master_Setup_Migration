@@ -43,7 +43,12 @@ void TCPClient::onReadyRead() {
     if (!in.commitTransaction())
         return;
 
-    qDebug() << nextData << "Size: " << nextData.size();
+    if (nextData.size() > 0) {
+        qDebug() << nextData.at(0);
+        QStringList data = QString::fromUtf8(nextData.right(nextData.size() - 1)).split(";");
+        qDebug() << data.size();
+    }
+
 }
 
 void TCPClient::signalSlotSetup() {
@@ -62,7 +67,7 @@ void TCPClient::sendRequest(const Request requestType, const QString data) {
     out << size << (uint8_t)requestType;
     out.writeRawData(data.toUtf8().constData(), data.length());
 
-    qDebug() << block;
+//    qDebug() << block;
 
     tcpSocket->write(block);
 }
