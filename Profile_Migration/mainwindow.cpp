@@ -10,6 +10,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     ui->tableView->setModel(m_model);
+    ui->tableView->resizeColumnsToContents();
+    ui->tableView->setColumnWidth(2, 600);
 
     tcpClient = new TCPClient(this);
 
@@ -28,9 +30,10 @@ void MainWindow::onOpenButtonClicked() {
     if (path.isEmpty())
         return;
 
-    masterFile = path;
+    m_model->setMasterFile(path);
+    ui->lineEdit->setText(path);
 
-    tcpClient->sendRequest(Request::Read, masterFile);
+    tcpClient->sendRequest(Request::Read, path);
 }
 
 void MainWindow::onSaveButtonClicked() {
@@ -46,7 +49,8 @@ void MainWindow::onSaveAsButtonClicked() {
     if (path.isEmpty())
         return;
 
-    masterFile = path;
+    m_model->setMasterFile(path);
+    ui->lineEdit->setText(path);
 }
 
 void MainWindow::onAutoPopulateButtonClicked() {
@@ -65,8 +69,23 @@ void MainWindow::buttonSignalSlotSetup() {
 }
 
 void MainWindow::signalSlotSetup() {
+    connect(tcpClient, &TCPClient::replyReceived, this, &MainWindow::onReplyReceived);
     connect(tcpClient, &TCPClient::errorMessage, this, &MainWindow::errorMessage);
+}
 
+void MainWindow::onReplyReceived(const QByteArray data) {
+    uint8_t replyType = data.at(0);
+    QByteArray replyData = data.right(data.size() - 1);
+
+    switch (replyType) {
+    case 1:
+        m_model->setSetupFilePaths(QString(replyData));
+        break;
+    case 2:
+        qDebug() << "Write reply";
+        qDebug() << replyData;
+        break;
+    }
 }
 
 void MainWindow::errorMessage(QString errorString) {

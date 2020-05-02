@@ -1,0 +1,74 @@
+0 - Channel Setup,.chn,,2
+1 - PID Setup,.pid,,2
+2 - Filter Setup,.fil,,2
+3 - ~Reserved Old CAN MSG,.cnm,,2
+4 - ~Reserved Old CAN 1,.can,,2
+5 - ~Reserved Old CAN 2,.can,,2
+6 - Digital Inputs Setup,.dis,,2
+7 - Digital Outputs Setup,.dos,,2
+8 - Logging 1 Setup,.lgg,,2
+9 - Logging 2 Setup,.lgg,,2
+10 - Logging 3 Setup,.lgg,,2
+11 - Setpoint Setup,.spt,,2
+12 - Test Series Setup,.tss,,2
+13 - Graph Setup,.grp,,2
+14 - System Configure,.cfs,,2
+15 - Header,.hdr,,2
+16 - Profile Manager,.pmgr,,2
+17 - Post-Mortem Logging,.lgg,,2
+18 - High-Speed Data,.hsd,,2
+19 - Statistic Channel Setup,.mth,,2
+20 - Ramp Channel Setup,.rsf,,2
+21 - ETAS INCA Channel Setup,.inc,,2
+22 - ETC ECCS Transducer Setup,.ecx,,2
+23 - ETC ECCS Test Setup,.ect,,2
+24 - AVL AK Smoke Meter Setup,.avl,,2
+25 - Triggers Setup,.trg,,2
+26 - Alarm Limits Setup,.lts,,2
+27 - YKWT1 Measurement,.msr,,2
+28 - YKWT1 Instrument,.wt3,,2
+29 - Auto File Settings,.afn,,2
+30 - Playback File Setting,.pla,,2
+31 - UUT Constants,.uut,,2
+32 - UPS Setup,.ups,,2
+33 - Differential Channel Setup,.dff,,2
+34 - Integral Channel Setup,.int,,2
+35 - Signal Channel Setup,.sig,,2
+36 - Calibration Setup,.cal,,2
+37 - BNC Setup,.bnc,,2
+38 - ASAP3 Setup,.as3,,2
+39 - Chassis Force Calculations,.cls,,2
+40 - Chassis Teststand Losses,.tls,,2
+41 - Chassis Vehicle Losses,.vls,,2
+42 - Formula Channels,.frm,,2
+43 - ASAP3 Map Coords Setup,.am3,,2
+44 - Digital Controls Setup,.dcs,,2
+45 - Push Buttons Setup,.pbs,,2
+46 - Sliders Setup,.scs,,2
+47 - ~Reserved~,.afi,,2
+48 - Email Setup,.eml,,2
+49 - Timer Setup,.tmr,,2
+50 - Unit Conversion Setup,.ucv,,2
+51 - Visible Channels,.vchn,,2
+52 - Main Display Setup,.mds,,2
+53 - Message Display Setup,.mdp,,2
+54 - Input Display Setup,.inp,,2
+55 - Unico Parameter Downloads,.uni,,2
+56 - Flow Meter Setup,.fms,,2
+57 - Channel Zero Offset,.chzo,,2
+58 - YKWT2 Measurement,.msr,,2
+59 - YKWT2 Instrument,.wt3,,2
+60 - ~Reserved Old CAN 3,.can,,2
+61 - CAS Setup,.cas,,2
+62 - Accumulation Channel Setup,.cml,,2
+63 - Valvetrain Dynamics Setup,.vtd,,2
+64 - CCP Setup,.ccp,,2
+65 - System Log Setup,.syl,,2
+66 - Throttle Controller,.tcrl,,2
+67 - RE Shifter,.csv,,2
+68 - Main Display,.mdsp,,2
+69 - ~Reserved~,.exa,,2
+70 - FlexRay,.flex,,2
+71 - YKWT3 Measurement,.msr,,2
+72 - YKWT3 Instrument,.wt3,,2
+73 - CAN XNET API,.cxt,,2

@@ -31,11 +31,14 @@ private:
     void signalSlotSetup();
 
 private slots:
+    /* Handle reply from server */
+    void onReplyReceived(const QByteArray data);
+
+    /* Display error message from TCP client */
     void errorMessage(QString errorString);
 
 private:
     Ui::MainWindow *ui;
-    QString masterFile;
     TCPClient *tcpClient;
     DataModel *m_model;
 };

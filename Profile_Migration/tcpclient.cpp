@@ -43,12 +43,7 @@ void TCPClient::onReadyRead() {
     if (!in.commitTransaction())
         return;
 
-    if (nextData.size() > 0) {
-        qDebug() << nextData.at(0);
-        QStringList data = QString::fromUtf8(nextData.right(nextData.size() - 1)).split(";");
-        qDebug() << data.size();
-    }
-
+    emit replyReceived(nextData);
 }
 
 void TCPClient::signalSlotSetup() {

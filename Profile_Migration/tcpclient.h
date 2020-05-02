@@ -22,7 +22,7 @@ public:
 
 signals:
     void errorMessage(const QString errorString);
-    void readyRead(const QByteArray data);
+    void replyReceived(const QByteArray data);
 
 public slots:
 
