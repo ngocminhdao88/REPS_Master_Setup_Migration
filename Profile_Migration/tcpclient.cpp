@@ -62,8 +62,6 @@ void TCPClient::sendRequest(const Request requestType, const QString data) {
     out << size << (uint8_t)requestType;
     out.writeRawData(data.toUtf8().constData(), data.length());
 
-//    qDebug() << block;
-
     tcpSocket->write(block);
 }
 

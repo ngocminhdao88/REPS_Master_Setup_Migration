@@ -35,11 +35,14 @@ void MainWindow::onOpenButtonClicked() {
     m_model->setMasterFile(path);
     ui->lineEdit->setText(path);
 
-    tcpClient->sendRequest(Request::Read, path);
+    tcpClient->sendRequest(Request::SetMasterFileRequest, path);
+    tcpClient->sendRequest(Request::ReadMasterFileRequest, "");
 }
 
 void MainWindow::onSaveButtonClicked() {
-    tcpClient->sendRequest(Request::Save, "Save Command");
+    QString setupFilePaths = m_model->getSetupFilePaths();
+
+    tcpClient->sendRequest(Request::WriteMasterFileRequest, setupFilePaths );
 }
 
 void MainWindow::onSaveAsButtonClicked() {
@@ -51,8 +54,13 @@ void MainWindow::onSaveAsButtonClicked() {
     if (path.isEmpty())
         return;
 
+    QString setupFilePaths = m_model->getSetupFilePaths();
+
     m_model->setMasterFile(path);
     ui->lineEdit->setText(path);
+
+    tcpClient->sendRequest(Request::SetMasterFileRequest, path);
+    tcpClient->sendRequest(Request::WriteMasterFileRequest, setupFilePaths );
 }
 
 void MainWindow::onAutoPopulateButtonClicked() {
@@ -66,7 +74,7 @@ void MainWindow::onAutoPopulateButtonClicked() {
 void MainWindow::buttonSignalSlotSetup() {
     connect(ui->openButton, &QAbstractButton::clicked, this, &MainWindow::onOpenButtonClicked);
     connect(ui->saveButton, &QAbstractButton::clicked, this, &MainWindow::onSaveButtonClicked);
-    //connect(ui->saveAsButton, &QAbstractButton::clicked, this, &MainWindow::onSaveAsButtonClicked);
+    connect(ui->saveAsButton, &QAbstractButton::clicked, this, &MainWindow::onSaveAsButtonClicked);
     connect(ui->autoPopulateButton, &QAbstractButton::clicked, this, &MainWindow::onAutoPopulateButtonClicked);
 }
 
@@ -83,18 +91,16 @@ void MainWindow::onReplyReceived(const QByteArray data) {
     QByteArray replyData = data.right(data.size() - 1);
 
     switch (replyType) {
-    case 1:
+    case Request::ReadMasterFileRequest:
         m_model->setSetupFilePaths(QString(replyData));
         break;
-    case 2:
-        qDebug() << "Write reply";
+    case Request::WriteMasterFileRequest:
         qDebug() << replyData;
         break;
     }
 }
 
 void MainWindow::errorMessage(QString errorString) {
-    qDebug() << errorString;
     statusBar()->showMessage(errorString);
 }
 

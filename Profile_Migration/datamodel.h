@@ -25,7 +25,15 @@ public:
     Qt::ItemFlags flags(const QModelIndex &index) const override;
     bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) override;
 
+    /*
+     * Update the setup file path in data model
+     */
     void setSetupFilePaths(const QString filePaths);
+
+    /*
+     * Get setup file path from data model
+     */
+    QString getSetupFilePaths();
 
     /* Update the master file path */
     void setMasterFile(const QString masterFile);

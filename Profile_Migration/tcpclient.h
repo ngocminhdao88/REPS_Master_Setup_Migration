@@ -6,9 +6,9 @@
 #include <QDataStream>
 
 enum Request {
-    Read = 1,
-    Save = 2,
-    Exit = 15
+    SetMasterFileRequest = 10,
+    ReadMasterFileRequest = 20,
+    WriteMasterFileRequest = 30
 };
 
 class TCPClient : public QObject

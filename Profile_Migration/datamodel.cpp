@@ -185,6 +185,16 @@ void DataModel::setSetupFilePaths(const QString filePaths) {
     emit dataChanged(topLeft, bottomRight);
 }
 
+QString DataModel::getSetupFilePaths() {
+    QStringList list;
+
+    for (SetupFile_t setupFile : m_data) {
+        list.append(setupFile.path);
+    }
+
+    return list.join(',');
+}
+
 void DataModel::setMasterFile(const QString masterFile) {
     if (masterFile != m_masterFile)
         m_masterFile = masterFile;
