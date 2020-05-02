@@ -19,11 +19,13 @@ SOURCES += \
     datamodel.cpp \
     main.cpp \
     mainwindow.cpp \
+    tableview.cpp \
     tcpclient.cpp
 
 HEADERS += \
     datamodel.h \
     mainwindow.h \
+    tableview.h \
     tcpclient.h
 
 FORMS += \

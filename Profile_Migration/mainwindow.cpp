@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include <QFileDialog>
 #include <QDebug>
+#include "tableview.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -69,6 +70,9 @@ void MainWindow::buttonSignalSlotSetup() {
 }
 
 void MainWindow::signalSlotSetup() {
+    connect(ui->tableView, &TableView::rightMouseClicked, m_model, &DataModel::clearSetupFilePath);
+    connect(ui->tableView, &TableView::doubleClicked, m_model, &DataModel::selectSetupFile);
+
     connect(tcpClient, &TCPClient::replyReceived, this, &MainWindow::onReplyReceived);
     connect(tcpClient, &TCPClient::errorMessage, this, &MainWindow::errorMessage);
 }

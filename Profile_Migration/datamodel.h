@@ -34,10 +34,10 @@ private:
     const int COLUMNS_COUNT = 4;
 
     enum SetupFileColumns {
-        Description,
-        Extension,
-        Path,
-        Status,
+        DescriptionColumn,
+        ExtensionColumn,
+        PathColumn,
+        StatusColumn,
     };
 
     enum FileStatus {
@@ -48,6 +48,17 @@ private:
 
     QVector<SetupFile_t> m_data;
     QString m_masterFile;
+
+public slots:
+    /*
+     * Remove setup file's path from data model
+     */
+    void clearSetupFilePath(const QModelIndex &index);
+
+    /*
+     * Open a file dialog to choose setup file
+     */
+    void selectSetupFile(const QModelIndex &index);
 
 private:
     /*

@@ -4,6 +4,7 @@
 #include <QTextStream>
 #include <QFile>
 #include <QDebug>
+#include <QFileDialog>
 
 DataModel::DataModel(QObject *parent)
     : QAbstractTableModel(parent)
@@ -29,10 +30,10 @@ QVariant DataModel::data(const QModelIndex &index, int role) const {
 
     switch (role) {
     case Qt::DisplayRole:
-        if (col == Description) return m_data.at(row).description;
-        if (col == Extension) return m_data.at(row).extension;
-        if (col == Path) return m_data.at(row).path;
-        if (col == Status) return m_data.at(row).status;
+        if (col == DescriptionColumn) return m_data.at(row).description;
+        if (col == ExtensionColumn) return m_data.at(row).extension;
+        if (col == PathColumn) return m_data.at(row).path;
+        if (col == StatusColumn) return m_data.at(row).status;
         break;
 
     case Qt::BackgroundRole:
@@ -51,13 +52,13 @@ QVariant DataModel::data(const QModelIndex &index, int role) const {
 QVariant DataModel::headerData(int section, Qt::Orientation orientation, int role) const {
     if (role == Qt::DisplayRole && orientation == Qt::Horizontal) {
         switch (section) {
-        case Description:
+        case DescriptionColumn:
             return QString("Description");
-        case Extension:
+        case ExtensionColumn:
             return QString("Extension");
-        case Path:
+        case PathColumn:
             return QString("Path");
-        case Status:
+        case StatusColumn:
             return QString("Status");
         }
     }
@@ -71,7 +72,7 @@ Qt::ItemFlags DataModel::flags(const QModelIndex &index) const {
 
     int col = index.column();
 
-    if (col == Status) //status
+    if (col == StatusColumn) //status
         return QAbstractTableModel::flags(index) | Qt::ItemIsEditable;
     else
         return QAbstractTableModel::flags(index);
@@ -88,16 +89,16 @@ bool DataModel::setData(const QModelIndex &index, const QVariant &value, int rol
         SetupFile_t &item = m_data[row];
 
         switch (col) {
-        case Description:
+        case DescriptionColumn:
             item.description = value.toString();
             break;
-        case Extension:
+        case ExtensionColumn:
             item.extension = value.toString();
             break;
-        case Path:
+        case PathColumn:
             item.path = value.toString();
             break;
-        case Status:
+        case StatusColumn:
             item.status = value.toInt();
             break;
         }
@@ -119,10 +120,10 @@ void DataModel::initDataModel() {
             QString myString = in.readLine();
             tempList = myString.split(",");
 
-            dataSet.description = tempList.at(Description);
-            dataSet.extension = tempList.at(Extension);
-            dataSet.path = tempList.at(Path);
-            dataSet.status = tempList.at(Status).toInt();
+            dataSet.description = tempList.at(DescriptionColumn);
+            dataSet.extension = tempList.at(ExtensionColumn);
+            dataSet.path = tempList.at(PathColumn);
+            dataSet.status = tempList.at(StatusColumn).toInt();
 
             m_data.append(dataSet);
         }
@@ -165,4 +166,45 @@ void DataModel::setSetupFilePaths(const QString filePaths) {
 void DataModel::setMasterFile(const QString masterFile) {
     if (masterFile != m_masterFile)
         m_masterFile = masterFile;
+}
+
+void DataModel::clearSetupFilePath(const QModelIndex &index) {
+    if (!checkIndex(index))
+        return;
+
+    int row = index.row();
+
+    SetupFile_t &setupFile = m_data[row];
+    setupFile.path.clear();
+
+    QModelIndex topLeft = createIndex(row, PathColumn);
+    emit dataChanged(topLeft, topLeft);
+}
+
+void DataModel::selectSetupFile(const QModelIndex &index) {
+    if (!checkIndex(index))
+        return;
+
+    int row = index.row();
+
+    SetupFile_t &setupFile = m_data[row];
+    const QString descWithNumber = setupFile.description;
+    int tempIndex = descWithNumber.indexOf('-');
+    const QString descWithoutNumber = descWithNumber.right(descWithNumber.size() - (tempIndex + 2));
+    const QString extension = setupFile.extension;
+
+    const QString path = QFileDialog::getOpenFileName(
+                nullptr,
+                "Open " + descWithoutNumber,
+                "",
+                extension
+                );
+
+    if (path.isEmpty())
+        return;
+
+    setupFile.path = path;
+
+    QModelIndex topLeft = createIndex(row, PathColumn);
+    emit dataChanged(topLeft, topLeft);
 }
