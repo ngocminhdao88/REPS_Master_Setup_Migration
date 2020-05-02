@@ -5,6 +5,7 @@
 #include <QFile>
 #include <QDebug>
 #include <QFileDialog>
+#include <QFileInfo>
 
 DataModel::DataModel(QObject *parent)
     : QAbstractTableModel(parent)
@@ -70,12 +71,14 @@ Qt::ItemFlags DataModel::flags(const QModelIndex &index) const {
     if (!checkIndex(index))
         return Qt::NoItemFlags;
 
-    int col = index.column();
+//    int col = index.column();
 
-    if (col == StatusColumn) //status
-        return QAbstractTableModel::flags(index) | Qt::ItemIsEditable;
-    else
-        return QAbstractTableModel::flags(index);
+//    if (col == StatusColumn) //status
+//        return QAbstractTableModel::flags(index) | Qt::ItemIsEditable;
+//    else
+//        return QAbstractTableModel::flags(index);
+
+    return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
 }
 
 bool DataModel::setData(const QModelIndex &index, const QVariant &value, int role) {
@@ -140,6 +143,23 @@ void DataModel::initDataModel() {
 }
 
 void DataModel::checkFileStatus(SetupFile_t &setupFile) {
+    QFileInfo masterFileInfo(m_masterFile);
+    QDir masterDir = masterFileInfo.absoluteDir();
+
+    QFileInfo setupFileInfo(setupFile.path);
+    QDir setupDir = setupFileInfo.absoluteDir();
+
+    if (!setupFileInfo.exists()) {
+        setupFile.status = FileNotExist;
+        return;
+    }
+
+    if (setupDir != masterDir) {
+        setupFile.status = FileExistNotSamePathAsMasterFile;
+        return;
+    }
+
+    setupFile.status = FileExistAndSamePathAsMasterFile;
 }
 
 void DataModel::checkAllFilesStatus() {
@@ -154,11 +174,13 @@ void DataModel::setSetupFilePaths(const QString filePaths) {
     }
 
     for (int i = 0; i < m_data.size(); i++) {
-        SetupFile_t &item = m_data[i];
-        item.path = tmpPaths.at(i);
+        SetupFile_t &setupFile = m_data[i];
+        setupFile.path = tmpPaths.at(i);
+
+        checkFileStatus(setupFile);
     }
 
-    QModelIndex topLeft = createIndex(0, 2);
+    QModelIndex topLeft = createIndex(0, PathColumn);
     QModelIndex bottomRight = createIndex(m_data.size() - 1, COLUMNS_COUNT - 1);
     emit dataChanged(topLeft, bottomRight);
 }
@@ -176,9 +198,11 @@ void DataModel::clearSetupFilePath(const QModelIndex &index) {
 
     SetupFile_t &setupFile = m_data[row];
     setupFile.path.clear();
+    setupFile.status = FileNotExist;
 
     QModelIndex topLeft = createIndex(row, PathColumn);
-    emit dataChanged(topLeft, topLeft);
+    QModelIndex bottomRight = createIndex(m_data.size() - 1, COLUMNS_COUNT - 1);
+    emit dataChanged(topLeft, bottomRight);
 }
 
 void DataModel::selectSetupFile(const QModelIndex &index) {
@@ -205,6 +229,9 @@ void DataModel::selectSetupFile(const QModelIndex &index) {
 
     setupFile.path = path;
 
+    checkFileStatus(setupFile);
+
     QModelIndex topLeft = createIndex(row, PathColumn);
-    emit dataChanged(topLeft, topLeft);
+    QModelIndex bottomRight = createIndex(m_data.size() - 1, COLUMNS_COUNT - 1);
+    emit dataChanged(topLeft, bottomRight);
 }

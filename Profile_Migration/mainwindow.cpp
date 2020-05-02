@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->tableView->setModel(m_model);
     ui->tableView->resizeColumnsToContents();
     ui->tableView->setColumnWidth(2, 600);
+    ui->tableView->setColumnHidden(3, true); //status column
 
     tcpClient = new TCPClient(this);
 
