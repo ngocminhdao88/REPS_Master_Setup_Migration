@@ -38,6 +38,17 @@ public:
     /* Update the master file path */
     void setMasterFile(const QString masterFile);
 
+    /*
+     * Check all setup files status
+     * @brief: Check to see if file exists or in the same path as master file
+     */
+    void checkAllFilesStatus();
+
+    /*
+     * Change the base directory of setup files to the new one
+     */
+    void changeDirectory(QString dir);
+
 private:
     const int COLUMNS_COUNT = 4;
 
@@ -81,11 +92,6 @@ private:
      */
     void checkFileStatus(SetupFile_t &setupFile);
 
-    /*
-     * Check all setup files status
-     * @brief: Check to see if file exists or in the same path as master file
-     */
-    void checkAllFilesStatus();
 };
 
 #endif // DATAMODEL_H

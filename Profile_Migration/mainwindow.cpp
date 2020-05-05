@@ -57,25 +57,28 @@ void MainWindow::onSaveAsButtonClicked() {
     QString setupFilePaths = m_model->getSetupFilePaths();
 
     m_model->setMasterFile(path);
+    m_model->checkAllFilesStatus();
     ui->lineEdit->setText(path);
 
     tcpClient->sendRequest(Request::SetMasterFileRequest, path);
-    tcpClient->sendRequest(Request::WriteMasterFileRequest, setupFilePaths );
+    tcpClient->sendRequest(Request::WriteMasterFileRequest, setupFilePaths);
 }
 
-void MainWindow::onAutoPopulateButtonClicked() {
+void MainWindow::onChangeDirectoryButtonClicked() {
     QString path = QFileDialog::getExistingDirectory(this,
                                                      "Select folder of Setup files");
 
     if (path.isEmpty())
         return;
+
+    m_model->changeDirectory(path);
 }
 
 void MainWindow::buttonSignalSlotSetup() {
     connect(ui->openButton, &QAbstractButton::clicked, this, &MainWindow::onOpenButtonClicked);
     connect(ui->saveButton, &QAbstractButton::clicked, this, &MainWindow::onSaveButtonClicked);
     connect(ui->saveAsButton, &QAbstractButton::clicked, this, &MainWindow::onSaveAsButtonClicked);
-    connect(ui->autoPopulateButton, &QAbstractButton::clicked, this, &MainWindow::onAutoPopulateButtonClicked);
+    connect(ui->changeDirectoryButton, &QAbstractButton::clicked, this, &MainWindow::onChangeDirectoryButtonClicked);
 }
 
 void MainWindow::signalSlotSetup() {

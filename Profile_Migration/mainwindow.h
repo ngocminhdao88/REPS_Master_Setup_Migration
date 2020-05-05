@@ -18,10 +18,25 @@ public:
     ~MainWindow();
 
 public slots:
+    /*
+     * A file dialog to open Master file.
+     */
     void onOpenButtonClicked();
+
+    /*
+     * Save all the changes to the opened Master file.
+     */
     void onSaveButtonClicked();
+
+    /*
+     * Save all the changes to another Master file.
+     */
     void onSaveAsButtonClicked();
-    void onAutoPopulateButtonClicked();
+
+    /*
+     * Change directory of all setup files to selected directory.
+     */
+    void onChangeDirectoryButtonClicked();
 
 private:
     /* Setup SIGNAL-SLOT for buttons */

@@ -149,21 +149,49 @@ void DataModel::checkFileStatus(SetupFile_t &setupFile) {
     QFileInfo setupFileInfo(setupFile.path);
     QDir setupDir = setupFileInfo.absoluteDir();
 
-    if (!setupFileInfo.exists()) {
-        setupFile.status = FileNotExist;
+    if (!setupFileInfo.exists() || !setupFileInfo.isFile()) {
+        setupFile.status = FileStatus::FileNotExist;
         return;
     }
 
     if (setupDir != masterDir) {
-        setupFile.status = FileExistNotSamePathAsMasterFile;
+        setupFile.status = FileStatus::FileExistNotSamePathAsMasterFile;
         return;
     }
 
-    setupFile.status = FileExistAndSamePathAsMasterFile;
+    setupFile.status = FileStatus::FileExistAndSamePathAsMasterFile;
 }
 
 void DataModel::checkAllFilesStatus() {
+    for (SetupFile_t &setupFile : m_data) {
+        checkFileStatus(setupFile);
+    }
 
+    QModelIndex topLeft = createIndex(0, 0);
+    QModelIndex bottomRight = createIndex(m_data.size() - 1, COLUMNS_COUNT - 1);
+    emit dataChanged(topLeft, bottomRight);
+}
+
+void DataModel::changeDirectory(QString dir) {
+    if (dir.isEmpty())
+        return;
+
+    for (SetupFile_t &setupFile : m_data) {
+        if (setupFile.path.isEmpty())
+            continue;
+
+        QFileInfo fileInfo(setupFile.path);
+        QString fileName = fileInfo.fileName();
+        QDir dirPath(dir);
+        QString newFilePath = dirPath.absoluteFilePath(fileName);
+
+        setupFile.path = newFilePath;
+        checkFileStatus(setupFile);
+    }
+
+    QModelIndex topLeft = createIndex(0, SetupFileColumns::PathColumn);
+    QModelIndex bottomRight = createIndex(m_data.size() - 1, COLUMNS_COUNT - 1);
+    emit dataChanged(topLeft, bottomRight);
 }
 
 void DataModel::setSetupFilePaths(const QString filePaths) {
