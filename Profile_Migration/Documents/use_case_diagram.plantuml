@@ -1,9 +1,0 @@
-@startuml
-
-User --> (Load Master File)
-User --> (Auto Populate Files)
-User --> (Save Master File)
-User --> (Choose Setup File)
-
-
-@enduml

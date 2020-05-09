@@ -6,6 +6,7 @@
 #include <QDebug>
 #include <QFileDialog>
 #include <QFileInfo>
+#include <QMessageBox>
 
 DataModel::DataModel(QObject *parent)
     : QAbstractTableModel(parent)
@@ -138,7 +139,9 @@ void DataModel::initDataModel() {
         emit dataChanged(topLeft, bottomRight);
     }
     else {
-        qDebug() << "Cannot open file";
+        QMessageBox::critical(nullptr,
+                              "Error",
+                              "setup_file_description is missing");
     }
 }
 
@@ -208,7 +211,7 @@ void DataModel::setSetupFilePaths(const QString filePaths) {
         checkFileStatus(setupFile);
     }
 
-    QModelIndex topLeft = createIndex(0, PathColumn);
+    QModelIndex topLeft = createIndex(0, SetupFileColumns::PathColumn);
     QModelIndex bottomRight = createIndex(m_data.size() - 1, COLUMNS_COUNT - 1);
     emit dataChanged(topLeft, bottomRight);
 }
