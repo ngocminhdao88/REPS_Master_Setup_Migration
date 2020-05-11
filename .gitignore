@@ -1,4 +1,11 @@
-*.user
+# ignore the build and lib dirs
 **/build*
+lib/*
+
+# ignore any executables
+bin/*
+
+# ignore another files
+*.user
 *.log
 **lock*
