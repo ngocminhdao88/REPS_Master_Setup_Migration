@@ -1,8 +1,9 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "tableview.h"
 #include <QFileDialog>
 #include <QDebug>
-#include "tableview.h"
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -105,6 +106,10 @@ void MainWindow::onReplyReceived(const QByteArray data) {
 
 void MainWindow::errorMessage(QString errorString) {
     statusBar()->showMessage(errorString);
+    QMessageBox::critical(this,
+                          "Error",
+                          errorString
+                          );
 }
 
 MainWindow::~MainWindow()

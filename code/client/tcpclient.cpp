@@ -21,13 +21,13 @@ void TCPClient::displayError(QAbstractSocket::SocketError socketError) {
     case QAbstractSocket::RemoteHostClosedError:
         break;
     case QAbstractSocket::HostNotFoundError:
-        errorString = "The host was not found. Please check the host name and port setting";
+        errorString = "The host was not found.\nPlease check the host name and port setting";
         break;
     case QAbstractSocket::ConnectionRefusedError:
-        errorString = "The coonection was refused by the peer";
+        errorString = "The conection was refused by the peer.\nPlease run the server first.";
         break;
     default:
-        errorString = "The following error occured: " + tcpSocket->errorString();
+        errorString = "The following error occured:\n" + tcpSocket->errorString();
     }
 
     if (!errorString.isEmpty())

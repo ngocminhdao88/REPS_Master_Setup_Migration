@@ -7,6 +7,7 @@
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QMessageBox>
+#include <QVariant>
 
 DataModel::DataModel(QObject *parent)
     : QAbstractTableModel(parent)
