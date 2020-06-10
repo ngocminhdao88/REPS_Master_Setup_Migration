@@ -95,11 +95,23 @@ void MainWindow::onReplyReceived(const QByteArray data) {
     QByteArray replyData = data.right(data.size() - 1);
 
     switch (replyType) {
+    case Request::SetMasterFileRequest:
+        if (replyData == "OK") {
+            statusBar()->showMessage("Set master file successfully");
+        }
+        break;
     case Request::ReadMasterFileRequest:
-        m_model->setSetupFilePaths(QString(replyData));
+        if (!replyData.isEmpty()) {
+            m_model->setSetupFilePaths(QString(replyData));
+            statusBar()->showMessage("Read master file successfully");
+        } else {
+            statusBar()->showMessage("Read master file not successfully");
+        }
         break;
     case Request::WriteMasterFileRequest:
-        qDebug() << replyData;
+        if (replyData == "OK") {
+            statusBar()->showMessage("Write master file successfully");
+        }
         break;
     }
 }
