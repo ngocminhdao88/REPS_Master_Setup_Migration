@@ -38,6 +38,9 @@
 		<Item Name="Type Definitions" Type="Folder">
 			<Item Name="UI Data.ctl" Type="VI" URL="../controls/UI Data.ctl"/>
 		</Item>
+		<Item Name="Testing" Type="Folder">
+			<Item Name="os_name.vi" Type="VI" URL="../testing/os_name.vi"/>
+		</Item>
 		<Item Name="DataFrame.lvclass" Type="LVClass" URL="../dataframe/DataFrame.lvclass"/>
 		<Item Name="data_processing.lvlib" Type="Library" URL="../data_processing/data_processing.lvlib"/>
 		<Item Name="server.lvlib" Type="Library" URL="../server/server.lvlib"/>
